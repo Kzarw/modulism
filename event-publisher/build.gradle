@@ -1,0 +1,12 @@
+plugins {
+  id 'java'
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.apache.kafka:kafka-clients:3.7.0'
+}

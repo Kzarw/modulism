@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/1-create-operation-table.sql
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 2
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/2-create-tax-defaults-table.sql
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 3
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/3-create-account-taxes-table.sql
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 4
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/4-insert-tax-defaults.sql
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 5
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/5-insert-sample-data.sql
+            splitStatements: true
+            stripComments: true
