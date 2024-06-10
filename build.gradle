@@ -2,6 +2,7 @@ plugins {
   id 'java'
   id 'org.springframework.boot' version '3.3.0'
   id 'io.spring.dependency-management' version '1.1.5'
+  id "io.gitlab.plunts.plantuml" version "2.1.7"
 }
 
 group = 'ru.tbank.javaconf'
@@ -22,6 +23,24 @@ configurations {
 repositories {
   mavenLocal()
   mavenCentral()
+}
+
+classDiagrams {
+  def modules = ["operations", "report", "tax"]
+  diagram {
+    name "Class Diagram"
+
+    include packages().withName("ru.tbank.javaconf.modulism.module")
+    exclude methods().thatAreAccessors()
+    exclude fields()
+
+    modules.each {
+      exclude packages().withName("ru.tbank.javaconf.modulism.module.${it}.dto").recursive()
+      exclude packages().withName("ru.tbank.javaconf.modulism.module.${it}.entity").recursive()
+    }
+
+    renderTo file('diagrams/classes.svg')
+  }
 }
 
 dependencies {
