@@ -44,3 +44,12 @@ logging:
 taxes:
   account: 101101
   bank: БАНК РОССИИ
+
+application:
+  modules:
+    report:
+      enabled: false
+    tax:
+      enabled: true
+    operations:
+      enabled: true

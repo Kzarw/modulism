@@ -72,6 +72,7 @@ dependencies {
   runtimeOnly 'io.zipkin.reporter2:zipkin-reporter-brave'
   runtimeOnly 'io.zipkin.brave:brave'
   runtimeOnly 'io.micrometer:micrometer-observation'
+  runtimeOnly 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
   // test
   testImplementation 'org.springframework.boot:spring-boot-starter-test'

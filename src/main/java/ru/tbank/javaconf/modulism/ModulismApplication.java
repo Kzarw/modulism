@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import ru.tbank.javaconf.modulism.config.properties.TaxesConfigurationProperties;
 
 @EnableConfigurationProperties(TaxesConfigurationProperties.class)
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "ru.tbank.javaconf.modulism.config")
 public class ModulismApplication {
 
   public static void main(String[] args) {
