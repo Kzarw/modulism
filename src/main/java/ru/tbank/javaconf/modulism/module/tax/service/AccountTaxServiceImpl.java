@@ -3,25 +3,26 @@ package ru.tbank.javaconf.modulism.module.tax.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.tbank.javaconf.modulism.module.operations.api.model.OperationDto;
+import ru.tbank.javaconf.modulism.module.operations.api.service.OperationService;
+import ru.tbank.javaconf.modulism.module.tax.api.service.AccountTaxService;
 import ru.tbank.javaconf.modulism.module.tax.dto.CalculatedTaxDto;
-import ru.tbank.javaconf.modulism.module.operations.dto.OperationDto;
-import ru.tbank.javaconf.modulism.module.operations.service.OperationService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AccountTaxService {
+public class AccountTaxServiceImpl implements AccountTaxService {
 
   private final OperationService operationService;
   private final AccountTaxRateService accountTaxRateService;
 
+  @Override
   public CalculatedTaxDto calculateTax(String account, Integer year) {
-    List<OperationDto> operations = operationService.getIncomingOperations(account, year);
+    var operations = operationService.getIncomingOperations(account, year);
     Instant calculatedAt = Instant.now();
 
     if (operations.isEmpty()) {

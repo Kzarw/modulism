@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AccountTaxRateService {
 
-
   private final AccountTaxRateRepository accountTaxRateRepository;
   private final TaxRateDefaultRepository taxRateDefaultRepository;
   private final AccountTaxRateMapper accountTaxRateMapper;

@@ -3,6 +3,7 @@ package ru.tbank.javaconf.modulism.module.operations.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.tbank.javaconf.modulism.module.operations.api.service.OperationService;
 import ru.tbank.javaconf.modulism.module.operations.dto.OperationDto;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.CreateOperationDto;
 import ru.tbank.javaconf.modulism.module.operations.entity.Operation;
@@ -14,14 +15,14 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
-public class OperationService {
+public class OperationServiceImpl implements OperationService {
   private final OperationRepository operationRepository;
   private final OperationMapper operationMapper;
 
   private final String bankName;
 
   @Autowired
-  public OperationService(
+  public OperationServiceImpl(
     OperationRepository operationRepository,
     OperationMapper operationMapper,
     @Value("${our.awesome.bank.name}") String bankName
@@ -32,6 +33,7 @@ public class OperationService {
   }
 
 
+  @Override
   public Iterable<OperationDto> getAccountOperations(String account) {
     return StreamSupport.stream(operationRepository.findByAccountAndBank(account, bankName).spliterator(), false)
       .map(operationMapper::toDto)
@@ -52,12 +54,14 @@ public class OperationService {
     operationRepository.deleteByTransactionNumber(trasactionNumber);
   }
 
+  @Override
   public List<OperationDto> getIncomingOperations(String account, Integer year) {
     return StreamSupport.stream(operationRepository.findIncomingByAccountAndBankAndYear(account, bankName, year).spliterator(), false)
       .map(operationMapper::toDto)
       .toList();
   }
 
+  @Override
   public List<OperationDto> getAccountOperations(String account, Integer year) {
     return StreamSupport.stream(operationRepository.findByAccountAndBank(account, bankName, year).spliterator(), false)
       .map(operationMapper::toDto)

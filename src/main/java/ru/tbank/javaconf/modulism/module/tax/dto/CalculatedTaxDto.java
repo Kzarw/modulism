@@ -8,5 +8,5 @@ public record CalculatedTaxDto(
   BigDecimal amountToPay,
   int year,
   String account
-) {
+) implements ru.tbank.javaconf.modulism.module.tax.api.model.CalculatedTaxDto {
 }

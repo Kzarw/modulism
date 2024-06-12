@@ -11,5 +11,5 @@ public record OperationDto(
   String payeeAccount,
   BigDecimal amount,
   LocalDate date
-) {
+) implements ru.tbank.javaconf.modulism.module.operations.api.model.OperationDto {
 }

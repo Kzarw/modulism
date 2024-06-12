@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.tbank.javaconf.modulism.module.tax.dto.CalculatedTaxDto;
-import ru.tbank.javaconf.modulism.module.tax.service.AccountTaxService;
+import ru.tbank.javaconf.modulism.module.tax.api.model.CalculatedTaxDto;
+import ru.tbank.javaconf.modulism.module.tax.api.service.AccountTaxService;
 
 @RestController
 @RequiredArgsConstructor

@@ -2,9 +2,12 @@ package ru.tbank.javaconf.modulism.module.operations.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.tbank.javaconf.modulism.module.operations.dto.OperationDto;
-import ru.tbank.javaconf.modulism.module.operations.service.OperationService;
+import ru.tbank.javaconf.modulism.module.operations.service.OperationServiceImpl;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -14,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OperationController {
 
-  private final OperationService operationService;
+  private final OperationServiceImpl operationService;
 
   @GetMapping("/{account}")
   public Iterable<OperationDto> getAllOperations(@PathVariable String account) {

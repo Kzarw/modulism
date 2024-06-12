@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.CreateOperationEvent;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.DeleteOperationEvent;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.OperationEvent;
-import ru.tbank.javaconf.modulism.module.operations.service.OperationService;
+import ru.tbank.javaconf.modulism.module.operations.service.OperationServiceImpl;
 
 @Component
 @Slf4j
@@ -19,7 +19,7 @@ import ru.tbank.javaconf.modulism.module.operations.service.OperationService;
 public class OperationKafkaListener {
 
   private final ObjectMapper objectMapper;
-  private final OperationService operationService;
+  private final OperationServiceImpl operationService;
   private final Tracer tracer;
 
   @KafkaListener(

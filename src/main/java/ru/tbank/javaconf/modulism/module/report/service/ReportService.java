@@ -4,10 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.tbank.javaconf.modulism.config.properties.TaxesConfigurationProperties;
-import ru.tbank.javaconf.modulism.module.operations.dto.OperationDto;
-import ru.tbank.javaconf.modulism.module.tax.service.AccountTaxRateService;
-import ru.tbank.javaconf.modulism.module.tax.service.AccountTaxService;
-import ru.tbank.javaconf.modulism.module.operations.service.OperationService;
+import ru.tbank.javaconf.modulism.module.operations.api.model.OperationDto;
+import ru.tbank.javaconf.modulism.module.tax.api.service.AccountTaxService;
+import ru.tbank.javaconf.modulism.module.operations.api.service.OperationService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,9 +17,8 @@ import java.util.List;
 public class ReportService {
 
   private final OperationService operationService;
-  private final AccountTaxRateService accountTaxRateService;
 
-  private final AccountTaxService accountTaxService;
+  private final AccountTaxService accountTaxServiceImpl;
 
   private final TaxesConfigurationProperties taxesConfigurationProperties;
   private final String bankName;
@@ -28,20 +26,18 @@ public class ReportService {
 
   public ReportService(
     OperationService operationService,
-    AccountTaxRateService accountTaxRateService,
-    AccountTaxService accountTaxService,
+    AccountTaxService accountTaxServiceImpl,
     TaxesConfigurationProperties taxesConfigurationProperties,
     @Value("${our.awesome.bank.name}") String bankName
   ) {
     this.operationService = operationService;
-    this.accountTaxRateService = accountTaxRateService;
-    this.accountTaxService = accountTaxService;
+    this.accountTaxServiceImpl = accountTaxServiceImpl;
     this.taxesConfigurationProperties = taxesConfigurationProperties;
     this.bankName = bankName;
   }
 
   public String generateReport(String accountNumber, Integer year) {
-    List<OperationDto> operations = operationService.getAccountOperations(accountNumber, year);
+    List<? extends OperationDto> operations = operationService.getAccountOperations(accountNumber, year);
 
     var incomes = operations.stream()
       .filter(o -> accountNumber.equals(o.payeeAccount()) && bankName.equals(o.payeeBank()))
@@ -59,7 +55,7 @@ public class ReportService {
       .map(OperationDto::amount)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-    var totalTaxesToPay = accountTaxService.calculateTax(accountNumber, year);
+    var totalTaxesToPay = accountTaxServiceImpl.calculateTax(accountNumber, year);
 
     BigDecimal totalPaidTaxes = outcomes.stream()
       .filter(
