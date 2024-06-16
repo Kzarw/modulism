@@ -5,8 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.tbank.javaconf.modulism.config.properties.TaxesConfigurationProperties;
 import ru.tbank.javaconf.modulism.module.operations.api.model.OperationDto;
-import ru.tbank.javaconf.modulism.module.tax.api.service.AccountTaxService;
 import ru.tbank.javaconf.modulism.module.operations.api.service.OperationService;
+import ru.tbank.javaconf.modulism.module.tax.api.model.CalculatedTaxDto;
+import ru.tbank.javaconf.modulism.module.tax.api.service.AccountTaxService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -34,6 +35,36 @@ public class ReportService {
     this.accountTaxServiceImpl = accountTaxServiceImpl;
     this.taxesConfigurationProperties = taxesConfigurationProperties;
     this.bankName = bankName;
+  }
+  public String generateReport(CalculatedTaxDto calculatedTaxDto) {
+    String accountNumber = calculatedTaxDto.account();
+    var operations = operationService.getAccountOperations(accountNumber, calculatedTaxDto.year());
+
+    var incomes = operations.stream()
+      .filter(o -> accountNumber.equals(o.payeeAccount()) && bankName.equals(o.payeeBank()))
+      .toList();
+
+    BigDecimal totalIncomes = incomes.stream()
+      .map(OperationDto::amount)
+      .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+    var outcomes = operations.stream()
+      .filter(o -> accountNumber.equals(o.payerAccount()) && bankName.equals(o.payerBank()))
+      .toList();
+
+    BigDecimal totalOutcomes = outcomes.stream()
+      .map(OperationDto::amount)
+      .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+    BigDecimal totalPaidTaxes = outcomes.stream()
+      .filter(
+        o -> taxesConfigurationProperties.getBank().equals(o.payeeBank())
+          && taxesConfigurationProperties.getAccount().equals(o.payeeAccount())
+      )
+      .map(OperationDto::amount)
+      .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+    return getReport(incomes, totalIncomes, outcomes, totalOutcomes, calculatedTaxDto, totalPaidTaxes);
   }
 
   public String generateReport(String accountNumber, Integer year) {
@@ -65,6 +96,17 @@ public class ReportService {
       .map(OperationDto::amount)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+    return getReport(incomes, totalIncomes, outcomes, totalOutcomes, totalTaxesToPay, totalPaidTaxes);
+  }
+
+  private static String getReport(
+    List<? extends OperationDto> incomes,
+    BigDecimal totalIncomes,
+    List<? extends OperationDto> outcomes,
+    BigDecimal totalOutcomes,
+    CalculatedTaxDto totalTaxesToPay,
+    BigDecimal totalPaidTaxes
+  ) {
     StringBuilder report = new StringBuilder();
     report.append("Incoming Operations:\n");
     incomes.forEach(op -> appendOperation(report, op).append("\n"));
@@ -100,5 +142,4 @@ public class ReportService {
       .append("\t")
       .append(operationDto.amount());
   }
-
 }

@@ -39,3 +39,11 @@ databaseChangeLog:
             path: classpath:liquibase/changelog/5-insert-sample-data.sql
             splitStatements: true
             stripComments: true
+  - changeSet:
+      id: 6
+      author: n.skornyakov
+      changes:
+        - sqlFile:
+            path: classpath:liquibase/changelog/6-events-table.sql
+            splitStatements: true
+            stripComments: true

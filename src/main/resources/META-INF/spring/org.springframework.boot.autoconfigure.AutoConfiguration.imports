@@ -1,3 +1,4 @@
 ru.tbank.javaconf.modulism.module.tax.TaxAutoConfiguration
 ru.tbank.javaconf.modulism.module.operations.OperationsAutoConfiguration
 ru.tbank.javaconf.modulism.module.report.ReportAutoConfiguration
+ru.tbank.javaconf.modulism.module.base.BaseAutoConfiguration

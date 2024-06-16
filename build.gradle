@@ -55,6 +55,9 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'jakarta.validation:jakarta.validation-api'
   implementation 'org.springframework.kafka:spring-kafka'
+  // required for custom module placement
+  implementation 'org.springframework.modulith:spring-modulith-core'
+
   implementation 'org.springframework.modulith:spring-modulith-starter-core'
   implementation 'org.springframework.modulith:spring-modulith-starter-jdbc'
   implementation 'io.micrometer:micrometer-tracing'
@@ -73,6 +76,8 @@ dependencies {
   runtimeOnly 'io.zipkin.brave:brave'
   runtimeOnly 'io.micrometer:micrometer-observation'
   runtimeOnly 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+  // provides spring-modulith-runtime which adds runtime check and tracing
+  runtimeOnly 'org.springframework.modulith:spring-modulith-starter-insight'
 
   // test
   testImplementation 'org.springframework.boot:spring-boot-starter-test'

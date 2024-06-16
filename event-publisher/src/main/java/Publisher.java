@@ -4,7 +4,6 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Publisher {
@@ -17,7 +16,7 @@ public class Publisher {
           "payerBank": "SomeBank",
           "payerAccount": "200030",
           "payeeAccount": "123456",
-          "payeeBank": "T-Банк",
+          "payeeBank": "T-Bank",
           "amount": 30000,
           "transactionNumber": 944404321,
           "operationDateTime": "2024-06-01T11:12:13Z"

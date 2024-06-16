@@ -7,13 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.CreateOperationEvent;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.DeleteOperationEvent;
 import ru.tbank.javaconf.modulism.module.operations.dto.event.OperationEvent;
 import ru.tbank.javaconf.modulism.module.operations.service.OperationServiceImpl;
 
-@Component
+@Controller
 @Slf4j
 @RequiredArgsConstructor
 public class OperationKafkaListener {
@@ -26,6 +27,7 @@ public class OperationKafkaListener {
     topics = "operations.topic",
     groupId = "modulismApp"
   )
+  @Transactional
   public void onOperationEventReceived(Message<String> operationEventMessage) throws JsonProcessingException {
     var span = tracer.nextSpan().name("OperationKafkaListener");
     try (final var ws = tracer.withSpan(span.start())) {

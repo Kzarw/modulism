@@ -18,6 +18,7 @@ import java.util.Optional;
 public class OperationController {
 
   private final OperationServiceImpl operationService;
+//  private final EventsPublicationsController eventsPublicationsController;
 
   @GetMapping("/{account}")
   public Iterable<OperationDto> getAllOperations(@PathVariable String account) {

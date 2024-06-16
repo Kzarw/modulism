@@ -3,7 +3,7 @@ mockserver:
 our:
   awesome:
     bank:
-      name: T-Банк
+      name: T-Bank
 spring:
   application:
     name: modulism
@@ -41,6 +41,7 @@ management:
 logging:
   level:
     ru.tbank: DEBUG
+    org.springframework: DEBUG
 taxes:
   account: 101101
   bank: БАНК РОССИИ
@@ -48,7 +49,7 @@ taxes:
 application:
   modules:
     report:
-      enabled: false
+      enabled: true
     tax:
       enabled: true
     operations:
