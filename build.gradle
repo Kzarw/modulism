@@ -43,8 +43,8 @@ classDiagrams {
 }
 
 dependencies {
-  runtimeOnly project(":operations")
-  runtimeOnly project(":tax")
+  runtimeOnly project(":operations:operations-api-impl")
+  runtimeOnly project(":tax:tax-api-impl")
   runtimeOnly project(":report")
   testImplementation project(":shared")
 

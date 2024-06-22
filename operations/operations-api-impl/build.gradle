@@ -5,8 +5,8 @@ plugins {
 dependencies {
   implementation project(":shared")
   implementation project(":operations:operations-api")
-  implementation project(":tax:tax-api")
   implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.kafka:spring-kafka'
+  implementation 'io.micrometer:micrometer-tracing'
 }

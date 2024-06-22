@@ -1,8 +1,10 @@
 rootProject.name = 'modulism'
 
 include(
-  'operations',
-  'tax',
+  'operations:operations-api',
+  'operations:operations-api-impl',
+  'tax:tax-api',
+  'tax:tax-api-impl',
   'report',
   'shared'
 )

@@ -1,0 +1,7 @@
+plugins {
+  id 'conventions'
+}
+
+jar {
+  archiveBaseName = "operations-api"
+}
