@@ -1,0 +1,58 @@
+plugins {
+  id 'java'
+}
+
+group = 'ru.tbank.javaconf'
+version = '0.0.1-SNAPSHOT'
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+dependencies {
+  implementation(platform("org.springframework.modulith:spring-modulith-bom:1.2.0"))
+  implementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.0"))
+  implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.2"))
+  implementation(platform("io.micrometer:micrometer-tracing-bom:latest.release"))
+
+  annotationProcessor(platform("org.springframework.modulith:spring-modulith-bom:1.2.0"))
+  annotationProcessor(platform("org.springframework.boot:spring-boot-dependencies:3.3.0"))
+  annotationProcessor(platform("io.micrometer:micrometer-tracing-bom:latest.release"))
+
+  compileOnly 'org.projectlombok:lombok:1.18.32'
+
+  implementation 'jakarta.validation:jakarta.validation-api'
+  implementation 'org.springframework.modulith:spring-modulith-api'
+  implementation 'org.springframework.modulith:spring-modulith-events-api'
+
+  annotationProcessor 'org.projectlombok:lombok:1.18.32'
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
+  testImplementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
+  testImplementation testFixtures(project(":shared"))
+
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+}
+
+compileJava {
+  options.compilerArgs << '-parameters'
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}

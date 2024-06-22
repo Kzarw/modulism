@@ -1,0 +1,8 @@
+plugins {
+  id 'conventions'
+  id 'java-test-fixtures'
+}
+
+dependencies {
+  testFixturesImplementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
+}
