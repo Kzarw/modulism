@@ -1,4 +1,4 @@
-package ru.tbank.javaconf.modulism.config.properties;
+package ru.tbank.javaconf.modulism.root.config.properties;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

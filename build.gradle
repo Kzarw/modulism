@@ -2,6 +2,7 @@ plugins {
   id 'conventions'
   id 'org.springframework.boot' version '3.3.0'
   id "io.gitlab.plunts.plantuml" version "2.1.7"
+  id "org.gradlex.extra-java-module-info" version "1.8"// apply(false)
 }
 
 group = 'ru.tbank.javaconf'
@@ -43,9 +44,9 @@ classDiagrams {
 }
 
 dependencies {
-  runtimeOnly project(":operations")
-  runtimeOnly project(":tax")
-  runtimeOnly project(":report")
+  implementation project(":operations")
+  implementation project(":tax")
+  implementation project(":report")
   testImplementation project(":shared")
 
   //deps
@@ -62,7 +63,7 @@ dependencies {
 
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-  runtimeOnly 'com.h2database:h2'
+  implementation 'com.h2database:h2'
 
   // autoconfigured in runtime
   runtimeOnly 'org.liquibase:liquibase-core'
@@ -78,4 +79,20 @@ dependencies {
   // test
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+
+extraJavaModuleInfo {
+  automaticModule("org.apache.kafka:kafka-clients", "kafka.clients")
+  automaticModule("org.apache.kafka:kafka-clients", "kafka.clients")
+  automaticModule("com.github.jsqlparser:jsqlparser", "jsqlparser")
+  automaticModule("org.springframework.retry:spring-retry", "spring.retry")
+  automaticModule("org.webjars:swagger-ui", "swagger.ui")
+  automaticModule("org.xerial.snappy:snappy-java", "snappy")
+  automaticModule("org.hdrhistogram:HdrHistogram", "hrdhist")
+  automaticModule("org.latencyutils:LatencyUtils", "latensyutils")
+}
+
+bootRun {
+  modularity.inferModulePath = true
 }

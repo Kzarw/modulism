@@ -4,7 +4,7 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/1-create-operation-table.sql
+            path: classpath:migrations/changelog/1-create-operation-table.sql
             splitStatements: true
             stripComments: true
   - changeSet:
@@ -12,7 +12,7 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/2-create-tax-defaults-table.sql
+            path: classpath:migrations/changelog/2-create-tax-defaults-table.sql
             splitStatements: true
             stripComments: true
   - changeSet:
@@ -20,7 +20,7 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/3-create-account-taxes-table.sql
+            path: classpath:migrations/changelog/3-create-account-taxes-table.sql
             splitStatements: true
             stripComments: true
   - changeSet:
@@ -28,7 +28,7 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/4-insert-tax-defaults.sql
+            path: classpath:migrations/changelog/4-insert-tax-defaults.sql
             splitStatements: true
             stripComments: true
   - changeSet:
@@ -36,7 +36,7 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/5-insert-sample-data.sql
+            path: classpath:migrations/changelog/5-insert-sample-data.sql
             splitStatements: true
             stripComments: true
   - changeSet:
@@ -44,6 +44,6 @@ databaseChangeLog:
       author: n.skornyakov
       changes:
         - sqlFile:
-            path: classpath:liquibase/changelog/6-events-table.sql
+            path: classpath:migrations/changelog/6-events-table.sql
             splitStatements: true
             stripComments: true

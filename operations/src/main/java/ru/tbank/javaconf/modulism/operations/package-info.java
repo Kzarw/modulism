@@ -3,8 +3,7 @@
   exposedPackages = "ru.tbank.javaconf.modulism.operations.api.."
 )
 @ApplicationModule(
-  displayName = "operations",
-  allowedDependencies = "base"
+  displayName = "operations"
 )
 package ru.tbank.javaconf.modulism.operations;
 

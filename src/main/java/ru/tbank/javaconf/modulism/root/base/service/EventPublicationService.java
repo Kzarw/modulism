@@ -1,9 +1,9 @@
-package ru.tbank.javaconf.modulism.module.base.service;
+package ru.tbank.javaconf.modulism.root.base.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.tbank.javaconf.modulism.module.base.entity.EventPublication;
-import ru.tbank.javaconf.modulism.module.base.repository.EventPublicationRepository;
+import ru.tbank.javaconf.modulism.root.base.entity.EventPublication;
+import ru.tbank.javaconf.modulism.root.base.repository.EventPublicationRepository;
 
 @Service
 @RequiredArgsConstructor

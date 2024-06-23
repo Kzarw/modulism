@@ -1,4 +1,4 @@
-package ru.tbank.javaconf.modulism.module.base.entity;
+package ru.tbank.javaconf.modulism.root.base.entity;
 
 import lombok.Getter;
 import lombok.Setter;

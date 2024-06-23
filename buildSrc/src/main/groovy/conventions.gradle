@@ -19,6 +19,9 @@ configurations {
   compileOnly {
     extendsFrom annotationProcessor
   }
+  configureEach {
+    it.exclude([group: "aopalliance", module:"aopalliance"])
+  }
 }
 
 dependencies {
@@ -46,8 +49,15 @@ dependencies {
   testImplementation testFixtures(project(":shared"))
 
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
 }
+/*
+sourceSets {
+  main {
+    java {
+      exclude("module-info.java")
+    }
+  }
+}*/
 
 compileJava {
   options.compilerArgs << '-parameters'
@@ -55,4 +65,8 @@ compileJava {
 
 tasks.named('test') {
   useJUnitPlatform()
+}
+
+java {
+  modularity.inferModulePath = true
 }

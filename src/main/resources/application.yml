@@ -13,7 +13,7 @@ spring:
     url: jdbc:h2:mem:testdb;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     username: sa
   liquibase:
-    change-log: classpath:liquibase/db.changelog-master.yaml
+    change-log: classpath:migrations/db.changelog-master.yaml
   jackson:
     serialization:
       WRITE_BIGDECIMAL_AS_PLAIN: true
@@ -40,8 +40,8 @@ management:
       probability: 1.0 # 1.0 means 100% of requests will be traced.
 logging:
   level:
-    ru.tbank: DEBUG
-    org.springframework: DEBUG
+    ROOT: info
+    org.springframework: debug
 taxes:
   account: 101101
   bank: БАНК РОССИИ
